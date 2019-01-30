@@ -27,14 +27,14 @@ describe('compute-streak.js', () => {
     firebaseApp.delete();
   });
 
-  it('computes the streak of focus areas when adding additional entries', async () => {
-    const entries = {};
-    entries[getTodaysDate()] = 1;
-    const ref = firebaseApp.database().ref('/it-compute-streak/focusAreas');
-    await ref.set({
-      focusAreaId: { deleted: false, name: 'TDD', entries },
+  it('computes the streak of focus areas when adding additional entries', async function () {
+    this.timeout(10000);
+    const focusAreaRef = firebaseApp.database().ref('/it-compute-streak/focusAreas');
+    await focusAreaRef.set({
+      focusAreaId: { deleted: false, name: 'TDD' },
     });
-    const snapshot = await ref.once('value');
-    expect(snapshot.val().focusAreaId['@streak']).toEqual({ current: 1, longest: 1 });
+    await firebaseApp.database().ref(`/it-compute-streak/focusAreas/focusAreaId/entries/${getTodaysDate()}`).set(1);
+    const snapshot = await focusAreaRef.once('value');
+    expect(snapshot.val().focusAreaId['@streak']).toEqual({ current: 1 });
   });
 });
