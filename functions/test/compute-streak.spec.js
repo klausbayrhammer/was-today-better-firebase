@@ -8,22 +8,44 @@ function getTodaysDate(dayDifference) {
 }
 
 describe('compute-streak.js', () => {
-  it('computes current positive streak without entries', () => {
-    const { current } = computeStreak({});
-    expect(current).toEqual(0);
-  });
-  it('computes current positive streak for a single entry', () => {
-    const entries = {};
-    entries[getTodaysDate(0)] = 1;
-    const { current } = computeStreak(entries);
-    expect(current).toEqual(1);
-  });
+  describe('compute current streak', () => {
+    it('computes current positive streak without entries', () => {
+      const { current } = computeStreak({});
+      expect(current).toEqual(0);
+    });
+    it('computes current positive streak for a single entry', () => {
+      const entries = {};
+      entries[getTodaysDate(0)] = 1;
+      const { current } = computeStreak(entries);
+      expect(current).toEqual(1);
+    });
 
-  it('computes current positive streak for multiple entries', () => {
-    const entries = {};
-    entries[getTodaysDate(-1)] = 1;
-    entries[getTodaysDate(0)] = 1;
-    const { current } = computeStreak(entries);
-    expect(current).toEqual(2);
+    it('computes current positive streak for multiple entries', () => {
+      const entries = {};
+      entries[getTodaysDate(-1)] = 1;
+      entries[getTodaysDate(0)] = 1;
+      const { current } = computeStreak(entries);
+      expect(current).toEqual(2);
+    });
+  });
+  describe('compute longest streak', () => {
+    it('computes longest positive streak without entries', () => {
+      const { longest } = computeStreak({});
+      expect(longest).toEqual(0);
+    });
+    it('computes longest positive streak for multiple single entries', () => {
+      const entries = {};
+      entries[getTodaysDate(0)] = 1;
+      entries[getTodaysDate(-1)] = 1;
+      const { longest } = computeStreak(entries);
+      expect(longest).toEqual(2);
+    });
+
+    it('computes longest positive streak for a single entry in the past', () => {
+      const entries = {};
+      entries[getTodaysDate(-1)] = 1;
+      const { longest } = computeStreak(entries);
+      expect(longest).toEqual(1);
+    });
   });
 });

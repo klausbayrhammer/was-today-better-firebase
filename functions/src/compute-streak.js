@@ -1,13 +1,27 @@
-function getTodaysDate(daysBeforeToday) {
-  const date = new Date();
-  date.setDate(date.getDate() - daysBeforeToday);
-  return date.toISOString().split('T')[0];
+function getDateBeforeReferenceDate(daysBeforeToday, refDate) {
+  refDate.setDate(refDate.getDate() - daysBeforeToday);
+  return refDate.toISOString().split('T')[0];
+}
+
+function computeStreakFromDate(entries, refDate) {
+  let streak = 0;
+  while (entries[getDateBeforeReferenceDate(streak, refDate)] === 1) {
+    streak += 1;
+  }
+  return streak;
+}
+
+function longestStreak(entries) {
+  const streaks = Object.keys(entries).map(key => computeStreakFromDate(entries, new Date(key)));
+  return Math.max(...streaks, 0);
+}
+
+function currentStreak(entries) {
+  return computeStreakFromDate(entries, new Date());
 }
 
 module.exports = (entries) => {
-  let currentStreak = 0;
-  while (entries[getTodaysDate(currentStreak)] === 1) {
-    currentStreak += 1;
-  }
-  return { current: currentStreak };
+  const current = currentStreak(entries);
+  const longest = longestStreak(entries);
+  return { current, longest };
 };
