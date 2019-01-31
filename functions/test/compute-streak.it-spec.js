@@ -10,7 +10,8 @@ function getTodaysDate() {
 describe('compute-streak.js', () => {
   let firebaseApp;
 
-  before(async () => {
+  before(async function () {
+    this.timeout(10000);
     firebaseApp = await firebase.initializeApp({
       apiKey: 'AIzaSyAC26X8bWaMmZJ-v5yr6NsJaLdXkOBDGIs',
       authDomain: 'was-today-better-dev.firebaseapp.com',
