@@ -25,4 +25,5 @@ jobs:
 
       - run: cd functions && yarn lint
       - run: cd functions && yarn test
-      - run: ./functions/node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+      - run: ./functions/node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN -P development
+      - run: ./functions/node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN -P production

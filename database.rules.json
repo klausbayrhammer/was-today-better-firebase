@@ -3,8 +3,8 @@
     ".read": false,
     ".write": false,
     "$uid": {
-      ".read": "(auth != null) && ($uid === auth.uid || auth.uid === 'F88u4NW5Vjei2MkGYnFycG69ZNy1')",
-      ".write": "(auth != null) && ($uid === auth.uid || auth.uid === 'F88u4NW5Vjei2MkGYnFycG69ZNy1')"
+      ".read": "(auth != null) && ($uid === auth.uid || auth.uid === 'F88u4NW5Vjei2MkGYnFycG69ZNy1' || auth.uid === 'qnNSwphFOga5b5xEb0hWYB7NxHS2')",
+      ".write": "(auth != null) && ($uid === auth.uid || auth.uid === 'F88u4NW5Vjei2MkGYnFycG69ZNy1' || auth.uid === 'qnNSwphFOga5b5xEb0hWYB7NxHS2')"
     }
   }
 }

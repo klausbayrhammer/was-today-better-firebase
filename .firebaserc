@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "was-today-better-dev"
+    "development": "was-today-better-dev",
+    "production": "was-today-better"
   }
 }
