@@ -47,5 +47,15 @@ describe('compute-streak.js', () => {
       const { longest } = computeStreak(entries);
       expect(longest).toEqual(1);
     });
+
+    it('computes longest positive streak when streak spans two months', () => {
+      const entries = {};
+      entries['2019-01-31'] = 1;
+      entries['2019-02-01'] = 1;
+      entries['2019-02-02'] = 1;
+      entries['2019-02-03'] = 1;
+      const { longest } = computeStreak(entries);
+      expect(longest).toEqual(4);
+    });
   });
 });

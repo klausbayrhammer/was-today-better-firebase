@@ -1,6 +1,7 @@
 function getDateBeforeReferenceDate(daysBeforeToday, refDate) {
-  refDate.setDate(refDate.getDate() - daysBeforeToday);
-  return refDate.toISOString().split('T')[0];
+  const dateBeforeReferenceDate = new Date();
+  dateBeforeReferenceDate.setDate(refDate.getDate() - daysBeforeToday);
+  return dateBeforeReferenceDate.toISOString().split('T')[0];
 }
 
 function computeStreakFromDate(entries, refDate) {

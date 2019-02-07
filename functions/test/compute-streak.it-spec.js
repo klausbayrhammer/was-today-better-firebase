@@ -7,6 +7,12 @@ function getTodaysDate() {
   return new Date().toISOString().split('T')[0];
 }
 
+function wait(milliseconds) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+
 describe('compute-streak.js', () => {
   let firebaseApp;
 
@@ -35,7 +41,8 @@ describe('compute-streak.js', () => {
       focusAreaId: { deleted: false, name: 'TDD' },
     });
     await firebaseApp.database().ref(`/it-compute-streak/focusAreas/focusAreaId/entries/${getTodaysDate()}`).set(1);
+    await wait(1000);
     const snapshot = await focusAreaRef.once('value');
-    expect(snapshot.val().focusAreaId['@streak']).toEqual({ current: 1 });
+    expect(snapshot.val().focusAreaId['@streak']).toEqual({ current: 1, longest: 1 });
   });
 });
